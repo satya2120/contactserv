@@ -37,13 +37,20 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getContacts(String start, String end, String page, String email, String mobile) throws Exception{
+    public List<Contact> getContacts(String start, String end, String page, String email, String mobile, String firstName, String lastName) throws Exception{
         if(Objects.nonNull(email)){
             return contactRepository.findByEmail(email);
         }
 
         if(Objects.nonNull(mobile)){
             return contactRepository.findByMobileNo(mobile);
+        }
+        if(Objects.nonNull(firstName)){
+            return contactRepository.findByFirstName(firstName);
+        }
+
+        if(Objects.nonNull(lastName)){
+            return contactRepository.findByLastName(lastName);
         }
 
         return contactRepository.findAll();

@@ -35,4 +35,24 @@ public class ContactRepositoryCustomImpl implements ContactRepositoryCustom {
         List<Contact> contactList = query.getResultList();
         return contactList;
     }
-}
+
+    @Override
+    public List<Contact> findByFirstName(String firstName) {
+        Query query = entityManager.createNativeQuery("SELECT contact.* FROM Contact as contact " +
+                "WHERE upper (contact.first_name) LIKE ? or lower (contact.first_name) LIKE ?", Contact.class);
+        query.setParameter(1, firstName.toUpperCase() + "%");
+        query.setParameter(2, firstName.toLowerCase() + "%");
+        List<Contact> contactList = query.getResultList();
+        return contactList;
+    }
+
+
+    @Override
+    public List<Contact> findByLastName(String lastName) {
+        Query query = entityManager.createNativeQuery("SELECT contact.* FROM Contact as contact " +
+                "WHERE upper (contact.last_name) LIKE ? or lower (contact.last_name) LIKE ?", Contact.class);
+        query.setParameter(1, lastName.toUpperCase() + "%");
+        query.setParameter(2, lastName.toLowerCase() + "%");
+        List<Contact> contactList = query.getResultList();
+        return contactList;
+    }}
