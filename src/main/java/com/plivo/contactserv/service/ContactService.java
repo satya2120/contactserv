@@ -10,7 +10,7 @@ public interface ContactService {
 
     Contact addContact(ContactRequest contactRequest);
 
-    List<Contact> getContacts(int start, int end, String email, String mobile);
+    List<Contact> getContacts(int start, int end, int page, String email, String mobile);
 
     Contact getContactsById(int id);
 

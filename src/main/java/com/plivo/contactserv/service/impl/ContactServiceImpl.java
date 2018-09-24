@@ -33,7 +33,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getContacts(int start, int end, String email, String mobile) {
+    public List<Contact> getContacts(int start, int end, int page, String email, String mobile) {
         if(Objects.nonNull(email)){
             return contactRepository.findByEmail(email);
         }
