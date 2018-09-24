@@ -1,6 +1,5 @@
 package com.plivo.contactserv.entity;
 
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 
