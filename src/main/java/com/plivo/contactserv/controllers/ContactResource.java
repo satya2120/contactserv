@@ -35,8 +35,13 @@ public class ContactResource {
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.GET)
-    public Contact getContactsById(@PathVariable("id") int id) throws Exception {
-        return contactService.getContactsById(id);
+    public ResponseEntity getContactsById(@PathVariable("id") int id) throws Exception {
+        try{
+            Contact contact = contactService.getContactsById(id);
+            return ResponseEntity.ok(contact);
+        } catch (NoSuchFieldException e){
+            return ResponseEntity.status(404).build();
+        }
     }
 
     @RequestMapping(path ="/", method = RequestMethod.POST)

@@ -76,8 +76,13 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact getContactsById(int id) throws Exception{
-        Contact contact = contactRepository.getOne(id);
-        return contact;
+        try {
+            Contact contact = contactRepository.getOne(id);
+            return contact;
+        } catch (Exception e){
+            throw new NoSuchFieldException("no contacts available");
+        }
+
     }
 
     @Override
