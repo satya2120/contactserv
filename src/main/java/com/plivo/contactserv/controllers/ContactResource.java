@@ -4,6 +4,7 @@ import com.plivo.contactserv.dto.ContactRequest;
 import com.plivo.contactserv.entity.Contact;
 import com.plivo.contactserv.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Consumes;
@@ -39,9 +40,15 @@ public class ContactResource {
     }
 
     @RequestMapping(path ="/", method = RequestMethod.POST)
-    public Contact addContact(@RequestBody ContactRequest contactRequest) throws Exception {
+    public ResponseEntity addContact(@RequestBody ContactRequest contactRequest) throws Exception {
 
-       return contactService.addContact(contactRequest);
+        try{
+            Contact contact = contactService.addContact(contactRequest);
+            return ResponseEntity.ok(contact);
+        } catch (NoSuchFieldException e){
+            return ResponseEntity.status(404).build();
+        }
+
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.PUT)

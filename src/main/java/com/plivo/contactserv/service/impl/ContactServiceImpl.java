@@ -5,9 +5,12 @@ import com.plivo.contactserv.entity.Contact;
 import com.plivo.contactserv.entity.User;
 import com.plivo.contactserv.repositories.ContactRepository;
 import com.plivo.contactserv.service.ContactService;
+import com.plivo.contactserv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,10 +20,25 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public Contact addContact(ContactRequest contactRequest) throws Exception {
-        Contact contact = getContact(contactRequest);
-        return contactRepository.save(contact);
+        if(Objects.nonNull(contactRequest.getUserId())){
+            try {
+                User user = userService.getUserById(contactRequest.getUserId());
+                Contact contact = getContact(contactRequest);
+                return contactRepository.save(contact);
+            } catch (Exception e){
+                throw new NoSuchFieldException("user id is null");
+            }
+
+
+        } else {
+            throw new NoSuchFieldException("user id is null");
+        }
+
 
     }
 
