@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+        "user_id",
         "first_name",
         "last_name",
         "primary_mobile",
@@ -24,6 +25,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class ContactRequest {
 
+    @JsonProperty("user_id")
+    private int userId;
     @JsonProperty("first_name")
     private String firstName;
     @JsonProperty("last_name")
@@ -44,6 +47,14 @@ public class ContactRequest {
     private List<Object> mobile = null;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     @JsonProperty("first_name")
     public String getFirstName() {

@@ -8,13 +8,13 @@ import java.util.List;
 public interface ContactService {
 
 
-    Contact addContact(ContactRequest contactRequest);
+    Contact addContact(ContactRequest contactRequest) throws Exception;
 
-    List<Contact> getContacts(int start, int end, int page, String email, String mobile);
+    List<Contact> getContacts(String start, String end, String page, String email, String mobile) throws Exception;
 
-    Contact getContactsById(int id);
+    Contact getContactsById(int id) throws Exception;
 
-    Contact updateContact(ContactRequest contactRequest);
+    Contact updateContact(ContactRequest contactRequest) throws Exception;
 
-    void deleteContact(int id);
+    void deleteContact(int id) throws Exception;
 }

@@ -23,33 +23,33 @@ public class ContactResource {
     private ContactService contactService;
 
     @RequestMapping(path ="/", method = RequestMethod.GET)
-    public List<Contact> getContacts(@QueryParam("start") int start,
-                                     @QueryParam("end") int end,
-                                     @QueryParam("page") int page,
+    public List<Contact> getContacts(@QueryParam("start") String start,
+                                     @QueryParam("end") String end,
+                                     @QueryParam("page") String page,
                                      @QueryParam("email") String email,
-                                     @QueryParam("mobile") String mobile){
+                                     @QueryParam("mobile") String mobile) throws Exception {
         return contactService.getContacts(start,end, page, email, mobile);
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.GET)
-    public Contact getContactsById(@PathVariable("id") int id) {
+    public Contact getContactsById(@PathVariable("id") int id) throws Exception {
         return contactService.getContactsById(id);
     }
 
     @RequestMapping(path ="/", method = RequestMethod.POST)
-    public Contact addContact(@RequestBody ContactRequest contactRequest){
+    public Contact addContact(@RequestBody ContactRequest contactRequest) throws Exception {
 
        return contactService.addContact(contactRequest);
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.PUT)
     public Contact updateContact(@PathVariable("id") int id,
-                                 @RequestBody ContactRequest contactRequest){
+                                 @RequestBody ContactRequest contactRequest) throws Exception {
         return contactService.updateContact(contactRequest);
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.DELETE)
-    public Response deleteContact(@PathVariable("id") int id){
+    public Response deleteContact(@PathVariable("id") int id) throws Exception {
         contactService.deleteContact(id);
         return Response.ok().build();
     }

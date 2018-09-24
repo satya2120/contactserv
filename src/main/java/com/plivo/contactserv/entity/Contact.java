@@ -1,8 +1,10 @@
 package com.plivo.contactserv.entity;
 
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.*;
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Embeddable
 @Entity
 @Table(name = "Contact")

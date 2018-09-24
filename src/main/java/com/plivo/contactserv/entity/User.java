@@ -1,7 +1,10 @@
 package com.plivo.contactserv.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Entity
 public class User {
 

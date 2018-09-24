@@ -2,6 +2,7 @@ package com.plivo.contactserv.service.impl;
 
 import com.plivo.contactserv.dto.ContactRequest;
 import com.plivo.contactserv.entity.Contact;
+import com.plivo.contactserv.entity.User;
 import com.plivo.contactserv.repositories.ContactRepository;
 import com.plivo.contactserv.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ContactServiceImpl implements ContactService {
     private ContactRepository contactRepository;
 
     @Override
-    public Contact addContact(ContactRequest contactRequest) {
+    public Contact addContact(ContactRequest contactRequest) throws Exception {
         Contact contact = getContact(contactRequest);
         return contactRepository.save(contact);
 
@@ -25,6 +26,9 @@ public class ContactServiceImpl implements ContactService {
 
     private Contact getContact(ContactRequest contactRequest) {
         Contact contact = new Contact();
+        User user = new User();
+        user.setId(contactRequest.getUserId());
+        contact.setUser(user);
         contact.setFirstName(contactRequest.getFirstName());
         contact.setLastName(contactRequest.getLastName());
         contact.setPrimaryEmail(contactRequest.getPrimaryEmail());
@@ -33,7 +37,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getContacts(int start, int end, int page, String email, String mobile) {
+    public List<Contact> getContacts(String start, String end, String page, String email, String mobile) throws Exception{
         if(Objects.nonNull(email)){
             return contactRepository.findByEmail(email);
         }
@@ -46,19 +50,20 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact getContactsById(int id) {
-        return contactRepository.getOne(id);
+    public Contact getContactsById(int id) throws Exception{
+        Contact contact = contactRepository.getOne(id);
+        return contact;
     }
 
     @Override
-    public Contact updateContact(ContactRequest contactRequest) {
+    public Contact updateContact(ContactRequest contactRequest) throws Exception{
 
         Contact contact = getContact(contactRequest);
         return contactRepository.save(contact);
     }
 
     @Override
-    public void deleteContact(int id) {
+    public void deleteContact(int id) throws Exception {
         contactRepository.deleteById(id);
     }
 

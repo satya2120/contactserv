@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ContactRepositoryCustom {
 
-    List<Contact> findByEmail(String email);
-    List<Contact> findByMobileNo(String mobileNo);
+    List<Contact> findByEmail(String email) throws Exception;
+    List<Contact> findByMobileNo(String mobileNo) throws Exception;
 }
