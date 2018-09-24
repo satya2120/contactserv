@@ -27,8 +27,10 @@ public class ContactResource {
 
     @RequestMapping(path ="/", method = RequestMethod.GET)
     public List<Contact> getContacts(@QueryParam("start") int start,
-                                     @QueryParam("end") int end){
-        return contactService.getContacts(start,end);
+                                     @QueryParam("end") int end,
+                                     @QueryParam("email") String email,
+                                     @QueryParam("mobile") String mobile){
+        return contactService.getContacts(start,end, email, mobile);
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.GET)

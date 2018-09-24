@@ -5,9 +5,10 @@ import com.plivo.contactserv.entity.Contact;
 import com.plivo.contactserv.repositories.ContactRepository;
 import com.plivo.contactserv.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -26,13 +27,21 @@ public class ContactServiceImpl implements ContactService {
         Contact contact = new Contact();
         contact.setFirstName(contactRequest.getFirstName());
         contact.setLastName(contactRequest.getLastName());
-        contact.setPrimaryemail(contactRequest.getPrimaryEmail());
+        contact.setPrimaryEmail(contactRequest.getPrimaryEmail());
         contact.setPrimaryMobile(contactRequest.getPrimaryMobileNo());
         return contact;
     }
 
     @Override
-    public List<Contact> getContacts(int start, int end) {
+    public List<Contact> getContacts(int start, int end, String email, String mobile) {
+        if(Objects.nonNull(email)){
+            return contactRepository.findByEmail(email);
+        }
+
+        if(Objects.nonNull(mobile)){
+            return contactRepository.findByMobileNo(mobile);
+        }
+
         return contactRepository.findAll();
     }
 

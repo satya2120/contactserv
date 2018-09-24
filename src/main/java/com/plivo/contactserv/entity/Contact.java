@@ -24,10 +24,10 @@ public class Contact {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "primary_email")
-    private String primaryemail;
+    @Column(name = "primary_email", unique = true)
+    private String primaryEmail;
 
-    @Column(name = "primary_mobile")
+    @Column(name = "primary_mobile", unique = true)
     private String primaryMobile;
 
     public Long getId() {
@@ -62,12 +62,12 @@ public class Contact {
         this.lastName = lastName;
     }
 
-    public String getPrimaryemail() {
-        return primaryemail;
+    public String getPrimaryEmail() {
+        return primaryEmail;
     }
 
-    public void setPrimaryemail(String primaryemail) {
-        this.primaryemail = primaryemail;
+    public void setPrimaryEmail(String primaryEmail) {
+        this.primaryEmail = primaryEmail;
     }
 
     public String getPrimaryMobile() {
