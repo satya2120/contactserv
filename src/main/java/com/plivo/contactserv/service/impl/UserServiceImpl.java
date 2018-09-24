@@ -1,9 +1,13 @@
 package com.plivo.contactserv.service.impl;
 
+import com.plivo.contactserv.dto.UserRequest;
+import com.plivo.contactserv.entity.User;
 import com.plivo.contactserv.repositories.UserRepository;
 import com.plivo.contactserv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -12,4 +16,22 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 
+    @Override
+    public User createUser(UserRequest userRequest) {
+
+        User user = new User();
+        user.setUserName(userRequest.getUserName());
+        user.setPassword(userRequest.getPassword());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return userRepository.getOne(id);
+    }
 }

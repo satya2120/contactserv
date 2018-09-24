@@ -4,10 +4,7 @@ import com.plivo.contactserv.dto.ContactRequest;
 import com.plivo.contactserv.entity.Contact;
 import com.plivo.contactserv.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -40,14 +37,14 @@ public class ContactResource {
     }
 
     @RequestMapping(path ="/", method = RequestMethod.POST)
-    public Contact addContact(ContactRequest contactRequest){
+    public Contact addContact(@RequestBody ContactRequest contactRequest){
 
        return contactService.addContact(contactRequest);
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.PUT)
     public Contact updateContact(@PathVariable("id") int id,
-                                 ContactRequest contactRequest){
+                                 @RequestBody ContactRequest contactRequest){
         return contactService.updateContact(contactRequest);
     }
 

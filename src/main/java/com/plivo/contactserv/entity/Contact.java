@@ -11,7 +11,7 @@ public class Contact {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "team_Sequence")
     @SequenceGenerator(name = "team_Sequence", sequenceName = "TEAM_SEQ")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -29,11 +29,11 @@ public class Contact {
     @Column(name = "primary_mobile", unique = true)
     private String primaryMobile;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
