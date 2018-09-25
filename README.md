@@ -23,7 +23,8 @@ Response payload: {
 }
 
 # Get user
-GET /user/
+
+[Get all user] GET /user/
 
 Response payload: [
     {
@@ -33,7 +34,7 @@ Response payload: [
     }
 ]
 
-GET /user/52
+[Get user by id] GET /user/52
 
 Response payload: {
     "id": 52,
@@ -71,7 +72,7 @@ Response payload: {
 
 # Get contact
 
-GET /contact/
+[Get all contact] GET /contact/
 
 Response payload: [
     {
@@ -88,7 +89,7 @@ Response payload: [
     }
 ]
 
-GET /contact/2
+[Get contact by id] GET /contact/2
 
 Response payload: {
     "id": 2,
@@ -100,6 +101,74 @@ Response payload: {
     "primaryEmail": "satyendra.ja7in@live.com",
     "primaryMobile": "9738803717"
 }
+
+[Get contact by first name] GET /contact/?firstName=satya
+
+Reponse payload: [
+    {
+        "id": 2,
+        "user": {
+            "id": 52,
+            "userName": "plivo",
+            "password": "plivo"
+        },
+        "firstName": "Satya",
+        "lastName": "Jain",
+        "primaryEmail": "satyendra.ja7in@live.com",
+        "primaryMobile": "9738803717"
+    }
+]
+
+[Get contact by last name] GET /contact/?lastName=jain
+
+Reponse payload: [
+    {
+        "id": 2,
+        "user": {
+            "id": 52,
+            "userName": "plivo",
+            "password": "plivo"
+        },
+        "firstName": "Satya",
+        "lastName": "Jain",
+        "primaryEmail": "satyendra.ja7in@live.com",
+        "primaryMobile": "9738803717"
+    }
+]
+
+[Get contact by email] GET /contact/?email=satyendra.ja7in@live.com
+
+Reponse payload: [
+    {
+        "id": 2,
+        "user": {
+            "id": 52,
+            "userName": "plivo",
+            "password": "plivo"
+        },
+        "firstName": "Satya",
+        "lastName": "Jain",
+        "primaryEmail": "satyendra.ja7in@live.com",
+        "primaryMobile": "9738803717"
+    }
+]
+
+[Get contact by mobile] GET /contact/?mobile=9738803717
+
+Reponse payload: [
+    {
+        "id": 2,
+        "user": {
+            "id": 52,
+            "userName": "plivo",
+            "password": "plivo"
+        },
+        "firstName": "Satya",
+        "lastName": "Jain",
+        "primaryEmail": "satyendra.ja7in@live.com",
+        "primaryMobile": "9738803717"
+    }
+]
 
 
 
