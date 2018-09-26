@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -25,19 +26,21 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact addContact(ContactRequest contactRequest) throws Exception {
-        if(Objects.nonNull(contactRequest.getUserId())){
-            try {
-                User user = userService.getUserById(contactRequest.getUserId());
-                Contact contact = getContact(contactRequest);
-                return contactRepository.save(contact);
-            } catch (Exception e){
+        if(Objects.nonNull(contactRequest.getUserId())) {
+
+            User user = userService.getUserById(contactRequest.getUserId());
+
+            if(user.getId() == null){
                 throw new NoSuchFieldException("user id is null");
             }
 
+            Contact contact = getContact(contactRequest);
+            return contactRepository.save(contact);
 
         } else {
             throw new NoSuchFieldException("user id is null");
         }
+
 
 
     }
@@ -76,12 +79,12 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact getContactsById(int id) throws Exception{
-        try {
-            Contact contact = contactRepository.getOne(id);
-            return contact;
-        } catch (Exception e){
-            throw new NoSuchFieldException("no contacts available");
-        }
+
+            Optional<Contact> contact = contactRepository.findById(id);
+            if(contact.isPresent()){
+                return contact.get();
+            }
+        return new Contact();
 
     }
 
