@@ -59,7 +59,7 @@ public class ContactResource {
     @RequestMapping(path ="/{id}", method = RequestMethod.PUT)
     public Contact updateContact(@PathVariable("id") int id,
                                  @RequestBody ContactRequest contactRequest) throws Exception {
-        return contactService.updateContact(contactRequest);
+        return contactService.updateContact(id,contactRequest);
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.DELETE)

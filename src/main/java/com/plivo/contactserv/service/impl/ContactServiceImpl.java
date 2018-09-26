@@ -8,9 +8,7 @@ import com.plivo.contactserv.service.ContactService;
 import com.plivo.contactserv.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.xml.ws.Response;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -89,10 +87,45 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact updateContact(ContactRequest contactRequest) throws Exception{
+    public Contact updateContact(int id, ContactRequest contactRequest) throws Exception{
+        Contact contact = getContactsById(id);
+        if(contact.getId() != null){
 
-        Contact contact = getContact(contactRequest);
-        return contactRepository.save(contact);
+            if(Objects.nonNull(contactRequest.getLastName())){
+                contact.setFirstName(contactRequest.getFirstName());
+            }
+
+            if(Objects.nonNull(contactRequest.getLastName())){
+                contact.setLastName(contactRequest.getLastName());
+            }
+            if(Objects.nonNull(contactRequest.getPrimaryEmail())){
+                contact.setPrimaryEmail(contactRequest.getPrimaryEmail());
+            }
+
+            if(Objects.nonNull(contactRequest.getPrimaryMobile())){
+                contact.setPrimaryMobile(contactRequest.getPrimaryMobile());
+            }
+
+            if(Objects.nonNull(contactRequest.getPrimaryMobile())){
+                contact.setPrimaryMobile(contactRequest.getPrimaryMobile());
+            }
+
+            if(Objects.nonNull(contactRequest.getFacebookLink())){
+                contact.setFacebookLink(contactRequest.getFacebookLink());
+            }
+
+            if(Objects.nonNull(contactRequest.getLinkedinLink())){
+                contact.setLinkedinLink(contactRequest.getLinkedinLink());
+            }
+
+            if(Objects.nonNull(contactRequest.getTwitterLink())){
+                contact.setTwitterLink(contactRequest.getTwitterLink());
+            }
+
+            return contactRepository.save(contact);
+        }
+
+       return new Contact();
     }
 
     @Override

@@ -31,6 +31,39 @@ public class Contact {
     @Column(name = "primary_mobile", unique = true)
     private String primaryMobile;
 
+    @Column(name = "facebook_link")
+    private String facebookLink;
+
+    @Column(name = "twitter_link")
+    private String twitterLink;
+
+    @Column(name = "linkedin_link")
+    private String linkedinLink;
+
+    public String getLinkedinLink() {
+        return linkedinLink;
+    }
+
+    public void setLinkedinLink(String linkedinLink) {
+        this.linkedinLink = linkedinLink;
+    }
+
+    public String getFacebookLink() {
+        return facebookLink;
+    }
+
+    public void setFacebookLink(String facebookLink) {
+        this.facebookLink = facebookLink;
+    }
+
+    public String getTwitterLink() {
+        return twitterLink;
+    }
+
+    public void setTwitterLink(String twitterLink) {
+        this.twitterLink = twitterLink;
+    }
+
     public Integer getId() {
         return id;
     }

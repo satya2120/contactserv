@@ -14,7 +14,7 @@ public interface ContactService {
 
     Contact getContactsById(int id) throws Exception;
 
-    Contact updateContact(ContactRequest contactRequest) throws Exception;
+    Contact updateContact(int id, ContactRequest contactRequest) throws Exception;
 
     void deleteContact(int id) throws Exception;
 }
