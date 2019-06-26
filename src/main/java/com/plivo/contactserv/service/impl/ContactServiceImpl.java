@@ -56,7 +56,8 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getContacts(String start, String end, String page, String email, String mobile, String firstName, String lastName) throws Exception{
+    public List<Contact> getContacts(String start, String end, String page, String email, String mobile,
+                                     String firstName, String lastName, String searchParam) throws Exception{
         if(Objects.nonNull(email)){
             return contactRepository.findByEmail(email);
         }
@@ -70,6 +71,10 @@ public class ContactServiceImpl implements ContactService {
 
         if(Objects.nonNull(lastName)){
             return contactRepository.findByLastName(lastName);
+        }
+
+        if(Objects.nonNull(searchParam)){
+            return contactRepository.find(searchParam);
         }
 
         return contactRepository.findAll();

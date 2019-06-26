@@ -30,8 +30,9 @@ public class ContactResource {
                                      @QueryParam("email") String email,
                                      @QueryParam("mobile") String mobile,
                                      @QueryParam("firstName") String firstName,
-                                     @QueryParam("lastName") String lastName) throws Exception {
-        return contactService.getContacts(start,end, page, email, mobile, firstName, lastName);
+                                     @QueryParam("lastName") String lastName,
+                                     @QueryParam("searchParam") String searchParam) throws Exception {
+        return contactService.getContacts(start,end, page, email, mobile, firstName, lastName, searchParam);
     }
 
     @RequestMapping(path ="/{id}", method = RequestMethod.GET)

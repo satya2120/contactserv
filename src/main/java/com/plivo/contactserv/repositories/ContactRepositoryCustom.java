@@ -10,4 +10,6 @@ public interface ContactRepositoryCustom {
     List<Contact> findByMobileNo(String mobileNo) throws Exception;
     List<Contact> findByFirstName(String firstName);
     List<Contact> findByLastName(String lastName);
+
+    List<Contact> find(String searchParam);
 }

@@ -55,4 +55,14 @@ public class ContactRepositoryCustomImpl implements ContactRepositoryCustom {
         query.setParameter(2, lastName.toLowerCase() + "%");
         List<Contact> contactList = query.getResultList();
         return contactList;
-    }}
+    }
+
+    @Override
+    public List<Contact> find(String searchParam){
+        Query query = entityManager.createNativeQuery("SELECT contact.* FROM Contact as contact " +
+                "WHERE contact.primary_mobile + contact.firstName + contact.lastName + contact.primaryEmail LIKE ?", Contact.class);
+        query.setParameter(1, "%" + searchParam + "%");
+        List<Contact> contactList = query.getResultList();
+        return contactList;
+    }
+}
